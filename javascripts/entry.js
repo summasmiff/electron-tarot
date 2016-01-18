@@ -13,20 +13,21 @@ var divStyle = {
 var Card = React.createClass({
   render: function() {
     var cardPic = classNames("card", this.props.card);
-    return (<div className={cardPic}>
-              {this.props.card}
-            </div>);
+    return (<div className={cardPic}></div>);
   }
 });
 
 var Layout = React.createClass({
   render: function() {
     var row = [];
-    // this.props.cards.forEach(function(card)) {
-      row.push(Card);
-    // }
-    React.render(row, document.getElementById('cards'));
-  }
+    for(var i=0; i<this.props.cards.length; i++) {
+      var item = this.props.cards[i];
+      row.push(<Card card={item} />);
+    }
+    return <div>{row}</div>;
+ }
 });
 
-ReactDOM.render(<Card card={'the-magician'} />, document.getElementById('content'));
+ReactDOM.render(<Layout cards={['the-hermit', 'the-fool', 'the-magician']} />,
+                document.getElementById('content'));
+
